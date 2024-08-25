@@ -1,4 +1,3 @@
-using System.Reflection;
 using CleanArchMvc.Domain.Entities;
 using FluentAssertions;
 
