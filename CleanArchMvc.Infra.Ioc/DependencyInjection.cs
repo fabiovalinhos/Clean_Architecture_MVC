@@ -13,24 +13,27 @@ namespace CleanArchMvc.Infra.Ioc
     public static class DependencyInjection
     {
         public static IServiceCollection AddInfrastructure(
-            this IServiceCollection service,
+            this IServiceCollection services,
         IConfiguration configuration)
         {
 
-            service.AddDbContext<ApplicationDbContext>(option =>
+            services.AddDbContext<ApplicationDbContext>(option =>
             option.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
             b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
             ));
 
 
-            service.AddScoped<ICategoryRepository, CategoryRepository>();
-            service.AddScoped<IProductRepository, ProductRepository>();
-            service.AddScoped<IProductService, ProductService>();
-            service.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();
 
-            service.AddAutoMapper(typeof(DomainToDTOMappingProfile));
+            services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 
-            return service;
+            var myHandlers = AppDomain.CurrentDomain.Load("CleanArchMvc.Application");
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(myHandlers) );
+
+            return services;
         }
     }
 }
