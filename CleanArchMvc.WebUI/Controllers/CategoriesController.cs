@@ -1,3 +1,4 @@
+using System.Xml.Schema;
 using CleanArchMvc.Application.DTOs;
 using CleanArchMvc.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -69,6 +70,28 @@ namespace CleanArchMvc.WebUI.Controllers
             }
 
             return View(categoryDto);
+        }
+
+        [HttpGet("delete")]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id is null)
+            {
+                return NotFound();
+            }
+
+            var categoryDto = await _categoryService.GetById(id);
+
+            if (categoryDto is null) return NotFound();
+
+            return View(categoryDto);
+        }
+
+        [HttpPost("delete"), ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _categoryService.Remove(id);
+            return RedirectToAction("Index");
         }
     }
 }
