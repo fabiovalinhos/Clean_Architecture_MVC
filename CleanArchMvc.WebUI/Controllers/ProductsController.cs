@@ -53,25 +53,47 @@ namespace CleanArchMvc.WebUI.Controllers
         {
             if (id is null) return NotFound();
 
-            var productDTO = await  _productService.GetById(id);
+            var productDTO = await _productService.GetById(id);
             if (productDTO is null) return NotFound();
 
-            var categories  = await _categoryService.GetCategories();
+            var categories = await _categoryService.GetCategories();
 
-            ViewBag.CategoryId = 
+            ViewBag.CategoryId =
             new SelectList(categories, "Id", "Name", productDTO.CategoryId);
 
             return View(productDTO);
         }
 
         [HttpPost("edit")]
-        public async Task <IActionResult> Edit (ProductDTO productDTO){
-            if (ModelState.IsValid){
+        public async Task<IActionResult> Edit(ProductDTO productDTO)
+        {
+            if (ModelState.IsValid)
+            {
                 await _productService.Update(productDTO);
                 return RedirectToAction(nameof(Index));
             }
 
             return View(productDTO);
+        }
+
+        [HttpGet("delete")]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id is null) return NotFound();
+
+            var productDTO = await _productService.GetById(id);
+
+            if (productDTO is null) return NotFound();
+
+            return View(productDTO);
+        }
+
+        [HttpPost("delete"), ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _productService.Remove(id);
+
+            return RedirectToAction("Index");
         }
     }
 }
