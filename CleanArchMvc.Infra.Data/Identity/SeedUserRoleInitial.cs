@@ -93,6 +93,5 @@ namespace CleanArchMvc.Infra.Data.Identity
                 _roleManager.CreateAsync(role).Result;
             }
         }
-
     }
 }
