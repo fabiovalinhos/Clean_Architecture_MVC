@@ -14,7 +14,7 @@ namespace CleanArchMvc.WebUI.Controllers
             _authenticate = authenticate;
         }
 
-        [HttpGet]
+        [HttpGet("login")]
         public IActionResult Login(string returnUrl)
         {
             return View(new LoginViewModel()
@@ -23,7 +23,7 @@ namespace CleanArchMvc.WebUI.Controllers
             });
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             var result =
@@ -45,13 +45,13 @@ namespace CleanArchMvc.WebUI.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("register")]
         public IActionResult Register()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             var result =
