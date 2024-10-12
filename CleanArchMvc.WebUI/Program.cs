@@ -1,3 +1,4 @@
+using CleanArchMvc.Domain.Account;
 using CleanArchMvc.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+SeedUserRoles(app);
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 // app.MapGet("/test", () => "Test Page");
@@ -31,3 +35,13 @@ app.MapControllerRoute(
 
 
 app.Run();
+
+// Método para rodar as seeds
+async void SeedUserRoles(IApplicationBuilder app){
+    using (var serviceScope =  app.ApplicationServices.CreateScope()){
+        var seed = serviceScope.ServiceProvider.GetService<ISeedUserRoleInitial>();
+
+        seed.SeedRoles();
+        seed.SeedUsers();
+    }
+}

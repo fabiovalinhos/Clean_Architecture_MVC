@@ -59,7 +59,7 @@ namespace CleanArchMvc.WebUI.Controllers
 
             if (result)
             {
-                return Redirect("/");
+                return Redirect("");
             }
             else
             {

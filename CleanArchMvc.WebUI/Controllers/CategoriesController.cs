@@ -1,11 +1,12 @@
-using System.Xml.Schema;
 using CleanArchMvc.Application.DTOs;
 using CleanArchMvc.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchMvc.WebUI.Controllers
 {
     [Route("[controller]")]
+    [Authorize]
     public class CategoriesController : Controller
     {
         public ICategoryService _categoryService { get; set; }
