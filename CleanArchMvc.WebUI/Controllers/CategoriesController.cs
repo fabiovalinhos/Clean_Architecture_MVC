@@ -88,6 +88,8 @@ namespace CleanArchMvc.WebUI.Controllers
             return View(categoryDto);
         }
 
+        // Teve que renomear pois tinha a mesma assinatura 
+        //do outro Delete
         [HttpPost("delete"), ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

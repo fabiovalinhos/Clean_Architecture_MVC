@@ -83,7 +83,7 @@ namespace CleanArchMvc.WebUI.Controllers
         }
 
         [HttpGet("delete")]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id is null) return NotFound();
@@ -95,6 +95,8 @@ namespace CleanArchMvc.WebUI.Controllers
             return View(productDTO);
         }
 
+        // Teve que renomear pois tinha a mesma assinatura 
+        // do outro Delete
         [HttpPost("delete"), ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
