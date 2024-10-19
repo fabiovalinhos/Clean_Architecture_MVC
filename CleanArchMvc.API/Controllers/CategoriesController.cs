@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using CleanArchMvc.Application.DTOs;
 using CleanArchMvc.Application.Interfaces;
 using CleanArchMvc.Domain.Interfaces;
@@ -29,6 +30,19 @@ namespace CleanArchMvc.API.Controllers
             }
 
             return Ok(categories);
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<CategoryDTO>> Get(int id)
+        {
+            var category = await _categoryService.GetById(id);
+
+            if (category is null)
+            {
+                return NotFound("Category not found");
+            }
+
+            return Ok(category);
         }
     }
 }
