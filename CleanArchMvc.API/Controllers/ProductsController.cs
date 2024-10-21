@@ -64,7 +64,7 @@ namespace CleanArchMvc.API.Controllers
         {
 
             if (id != productDTO.Id)
-                return BadRequest();
+                return BadRequest("Different id's");
 
 
             if (productDTO is null)
