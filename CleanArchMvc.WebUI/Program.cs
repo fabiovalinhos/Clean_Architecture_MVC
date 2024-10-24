@@ -37,9 +37,13 @@ app.MapControllerRoute(
 app.Run();
 
 // Método para rodar as seeds
-async void SeedUserRoles(IApplicationBuilder app){
-    using (var serviceScope =  app.ApplicationServices.CreateScope()){
-        var seed = serviceScope.ServiceProvider.GetService<ISeedUserRoleInitial>();
+async void SeedUserRoles(IApplicationBuilder app)
+{
+    using (var serviceScope =
+        app.ApplicationServices.CreateScope())
+    {
+        var seed =
+            serviceScope.ServiceProvider.GetService<ISeedUserRoleInitial>();
 
         seed.SeedRoles();
         seed.SeedUsers();

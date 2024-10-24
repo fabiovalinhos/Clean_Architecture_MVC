@@ -3,6 +3,7 @@ using CleanArchMvc.Infra.Ioc;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructureAPI(builder.Configuration);
+builder.Services.AddInfraStructureJWT(builder.Configuration);
 
 
 // Add services to the container.

@@ -56,7 +56,6 @@ namespace CleanArchMvc.API.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid Login attempt");
                 return BadRequest(ModelState);
             }
-
         }
 
         private UserToken GenerateToken(LoginModel userInfo)
