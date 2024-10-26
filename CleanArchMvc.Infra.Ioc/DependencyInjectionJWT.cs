@@ -31,7 +31,7 @@ namespace CleanArchMvc.Infra.Ioc
 
                      //valores validos
                      ValidIssuer = configuration["Jwt:Issuer"],
-                     ValidAudience = configuration["Jwt:http://www.fabiovalinhos.com"],
+                     ValidAudience = configuration["Jwt:Audience"],
                      IssuerSigningKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"])),
                      ClockSkew = TimeSpan.Zero

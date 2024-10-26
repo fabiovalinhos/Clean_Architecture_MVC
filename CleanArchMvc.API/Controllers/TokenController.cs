@@ -1,5 +1,6 @@
 ﻿using CleanArchMvc.API.Models;
 using CleanArchMvc.Domain.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -23,6 +24,7 @@ namespace CleanArchMvc.API.Controllers
             _configuration = configuration;
         }
 
+        [AllowAnonymous]
         [HttpPost("LoginUser")]
         public async Task<ActionResult<UserToken>> Login([FromBody] LoginModel userInfo)
         {
@@ -43,6 +45,7 @@ namespace CleanArchMvc.API.Controllers
 
         [HttpPost("CreateUser")]
         [ApiExplorerSettings(IgnoreApi = true)]
+        [Authorize]
         public async Task<ActionResult> CreateUser([FromBody] LoginModel userInfo)
         {
             var result = await _authentication.RegisterUser(userInfo.Email, userInfo.Password);
@@ -78,7 +81,7 @@ namespace CleanArchMvc.API.Controllers
 
             // definir tempo de expiração
             var expiration =
-                DateTime.UtcNow.AddMinutes(10);
+                DateTime.UtcNow.AddMinutes(30);
 
             //gerar o token
             JwtSecurityToken token = new JwtSecurityToken(
