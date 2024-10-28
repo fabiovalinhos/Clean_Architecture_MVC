@@ -44,6 +44,7 @@ namespace CleanArchMvc.Infra.Data.Identity
                 }
             }
 
+
             if (_userManager.FindByEmailAsync("admin@localhost").Result is null)
             {
                 ApplicationUser user = new()
