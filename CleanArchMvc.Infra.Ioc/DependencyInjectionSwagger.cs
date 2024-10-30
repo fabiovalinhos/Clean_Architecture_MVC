@@ -17,7 +17,7 @@ namespace CleanArchMvc.Infra.Ioc
                     //definir as configs
                     Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer",
+                    Scheme = "bearer",
                     BearerFormat = "JWT",
                     In = ParameterLocation.Header,
                     Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
@@ -34,7 +34,10 @@ namespace CleanArchMvc.Infra.Ioc
                         Reference = new OpenApiReference{
                         Type = ReferenceType.SecurityScheme,
                         Id = "Bearer"
-                        }
+                        },
+                        Scheme = "bearer",
+                        Name = "Authorization",
+                        In = ParameterLocation.Header
                     },
                     new string[]{ }
                     }
